@@ -2,13 +2,14 @@ package com.example.daftarhadirmahasiswa
 
 import android.os.Bundle
 import android.widget.TextView
+import android.content.Intent
+import android.net.Uri
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.daftarhadirmahasiswa.MahasiswaAdapter
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,18 +22,36 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val textViewWelcomeMessage : TextView = findViewById(R.id.textViewWelcomeMessage)
-
-        val email:String = intent.getStringExtra(Login.KEY_USERNAME) ?:""
-        textViewWelcomeMessage.text = "Hello, $email"
+        val textViewWelcomeMaasage : TextView = findViewById(R.id.textViewWelcomeMessage)
+        val email:String = intent.getStringExtra(Login.KEY_USERNAME) ?: ""
+        textViewWelcomeMaasage.text = "Hello, $email"
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycleview)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val listMahasiswa = mutableListOf<Mahasiswa>()
-        val mhsAdapter = MahasiswaAdapter(getMahasiswa())
+        val mhsAdapter = MahasiswaAdapter(
+            getMahasiswa(), ::shareProfile, ::goToProfilActivity)
         recyclerView.adapter = mhsAdapter
     }
+    fun goToProfilActivity(mahasiswa: Mahasiswa) {
+        val explicitIntent = Intent(this,
+            ProfileActivity::class.java)
+        explicitIntent.putExtra("name", mahasiswa.name)
+        startActivity(explicitIntent)
+    }
+    fun shareProfile(mahasiswa: Mahasiswa) {
+// val implicitIntent = Intent(Intent.ACTION_SEND)
+// implicitIntent.type = "text/plain"
+// implicitIntent.putExtra(Intent.EXTRA_EMAIL, mahasiswa.name)
+// implicitIntent.putExtra(Intent.EXTRA_TEXT, mahasiswa.nim)
+// startActivity(implicitIntent)
+
+        val implicitIntent = Intent(Intent.ACTION_VIEW,
+            Uri.parse("https://wa.me/6281230038392?text=Hallo")
+        )
+        startActivity(implicitIntent )
+    }
+
 
     fun getMahasiswa(): List<Mahasiswa> {
         val listMahasiswa = mutableListOf<Mahasiswa>()
@@ -241,6 +260,5 @@ class MainActivity : AppCompatActivity() {
         )
 
         return listMahasiswa
-
     }
 }

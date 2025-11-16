@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -7,17 +8,17 @@
 
     <TextView
         android:id="@+id/textViewNim"
-        tools:text="243307042"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:text="243307042"/>
 
     <TextView
         android:id="@+id/textViewName"
-        tools:text="Dimas Adjie Wibowo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"/>
+        android:layout_weight="2"
+        tools:text="Dimas Adjie Wibowo"/>
 
     <TextView
         android:id="@+id/textViewStatus"
@@ -26,4 +27,21 @@
         android:layout_weight="1"
         android:gravity="center"
         tools:text="Hadir"/>
+
+    <Button
+        android:id="@+id/buttonOpenProfile"
+        android:text="Open Profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/buttonShareProfile"
+        android:text="Share Profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="14sp" />
+
 </LinearLayout>
